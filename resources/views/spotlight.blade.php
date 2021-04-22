@@ -1,7 +1,9 @@
 <div>
     <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js" defer></script>
-
     <script>{!! file_get_contents($jsPath) !!}</script>
+    @isset($cssPath)
+        <style>{!! file_get_contents($cssPath) !!}</style>
+    @endisset
 
     <div x-data="LivewireUISpotlight({ componentId: '{{ $this->id }}', placeholder: '{{ config('livewire-ui-spotlight.placeholder') }}', commands: {{ $commands }} })"
          x-init="init()"
