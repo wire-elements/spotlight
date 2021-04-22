@@ -8,10 +8,10 @@
     <div x-data="LivewireUISpotlight({ componentId: '{{ $this->id }}', placeholder: '{{ config('livewire-ui-spotlight.placeholder') }}', commands: {{ $commands }} })"
          x-init="init()"
          x-show="isOpen"
-         @keydown.window.prevent.cmd.k="toggleOpen()"
-         @keydown.window.prevent.ctrl.k="toggleOpen()"
-         @keydown.window.prevent.cmd.slash="toggleOpen()"
-         @keydown.window.prevent.ctrl.slash="toggleOpen()"
+         @foreach(config('livewire-ui-spotlight.shortcuts') as $key)
+            @keydown.window.prevent.cmd.{{ $key }}="toggleOpen()"
+            @keydown.window.prevent.ctrl.{{ $key }}="toggleOpen()"
+         @endforeach
          @keydown.window.escape="isOpen = false"
          class="fixed z-50 px-4 pt-16 flex items-start justify-center inset-0 sm:pt-24">
         <div x-show="isOpen" x-transition:enter="ease-out duration-200" x-transition:enter-start="opacity-0"
