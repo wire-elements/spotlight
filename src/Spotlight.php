@@ -2,6 +2,8 @@
 
 namespace LivewireUI\Spotlight;
 
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\ImplicitlyBoundMethod;
@@ -59,7 +61,7 @@ class Spotlight extends Component
         }
     }
 
-    public function render(): \Illuminate\Contracts\View\View | \Illuminate\Contracts\View\Factory
+    public function render(): View | Factory
     {
         return view('livewire-ui-spotlight::spotlight', [
             'commands' => collect(self::$commands)->map(function (SpotlightCommand $command) {
