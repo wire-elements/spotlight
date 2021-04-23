@@ -2,6 +2,9 @@
 
 All notable changes to `spotlight` will be documented in this file.
 
+## 0.1.4
+- Add `make:spotlight` command.
+
 ## 0.1.3
 - Add `registerCommandIf` and `registerCommandUnless` helpers to register commands conditionally.
 - Fix element flashing by applying x-cloak

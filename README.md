@@ -52,6 +52,8 @@ You can create your first Spotlight command by creating a new class and have it
 extend `LivewireUI\Spotlight\SpotlightCommand`. Start by defining a `$name` and `$description` for your command. The
 name and description will be visible when searching through commands.
 
+To help you get started you can use the `php artisan make:spotlight <command-name>` command.
+
 ```php
 <?php
 
