@@ -22,7 +22,7 @@ class SpotlightCommandDependencies
 
     public function toArray(): array
     {
-        return $this->dependencies->map(fn ($dep) => $dep->toArray())->toArray();
+        return array_reverse($this->dependencies->map(fn ($dep) => $dep->toArray())->toArray());
     }
 
     public static function collection(): self

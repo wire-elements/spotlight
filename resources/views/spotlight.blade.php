@@ -39,11 +39,11 @@
                     </svg>
                 </div>
                 <input @keydown.tab.prevent="" @keydown.prevent.stop.enter="go()" @keydown.prevent.arrow-up="selectUp()"
-                       @keydown.prevent.arrow-down="selectDown()" x-ref="search" x-model="search"
+                       @keydown.prevent.arrow-down="selectDown()" x-ref="input" x-model="input"
                        type="text"
                        style="caret-color: #6b7280; border: 0 !important;"
                        class="appearance-none w-full bg-transparent px-6 py-4 text-gray-300 text-lg placeholder-gray-500 focus:border-0 focus:border-transparent focus:shadow-none outline-none focus:outline-none"
-                       x-bind:placeholder="searchPlaceholder">
+                       x-bind:placeholder="inputPlaceholder">
             </div>
             <div class="border-t border-gray-800" x-show="filteredItems().length > 0" style="display: none;">
                 <ul x-ref="results" style="max-height: 265px;" class="overflow-y-auto">

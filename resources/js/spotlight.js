@@ -1,6 +1,6 @@
 window.LivewireUISpotlight = (config) => {
     return {
-        searchPlaceholder: config.placeholder,
+        inputPlaceholder: config.placeholder,
         searchEngine: 'commands',
         commands: config.commands,
 
@@ -20,11 +20,11 @@ window.LivewireUISpotlight = (config) => {
 
             this.$watch('dependencyQueryResults', value => { this.dependencySearch.setCollection(value) });
 
-            this.$watch('search', value => {
+            this.$watch('input', value => {
                 if (value.length === 0) {
                     this.selected = 0;
                 }
-                if(this.selectedCommand !== null && this.currentDependency !== null){
+                if(this.selectedCommand !== null && this.currentDependency !== null && this.currentDependency.type === 'search'){
                     this.$wire.searchDependency(this.selectedCommand.id, this.currentDependency.id, value, this.resolvedDependencies);
                 }
             });
@@ -32,8 +32,8 @@ window.LivewireUISpotlight = (config) => {
             this.$watch('isOpen', value => {
                 if (value === false) {
                     setTimeout(() => {
-                        this.search = '';
-                        this.searchPlaceholder = config.placeholder;
+                        this.input = '';
+                        this.inputPlaceholder = config.placeholder;
                         this.searchEngine = 'commands';
                         this.resolvedDependencies = {};
                         this.selectedCommand = null;
@@ -51,19 +51,23 @@ window.LivewireUISpotlight = (config) => {
                 this.isOpen = false;
                 return;
             }
-            this.search = ''
+            this.input = ''
             this.isOpen = true
             setTimeout(() => {
-                this.$refs.search.focus()
+                this.$refs.input.focus()
             }, 100)
         },
-        search: '',
+        input: '',
         filteredItems() {
             if (this.searchEngine === 'commands') {
-                return this.commandSearch.search(this.search).map((item, i) => [item, i])
+                return this.commandSearch.search(this.input).map((item, i) => [item, i])
             }
 
-            return this.dependencySearch.search(this.search).map((item, i) => [item, i])
+            if (this.searchEngine === 'search') {
+                return this.dependencySearch.search(this.input).map((item, i) => [item, i])
+            }
+
+            return [];
         },
         selectUp() {
             this.selected = Math.max(0, this.selected - 1)
@@ -90,14 +94,22 @@ window.LivewireUISpotlight = (config) => {
             }
 
             if (this.currentDependency !== null) {
-                this.resolvedDependencies[this.currentDependency.id] = id ? id : this.filteredItems()[this.selected][0].item.id;
+                let dependencyValue;
+
+                if(this.currentDependency.type === 'search') {
+                    dependencyValue = id ? id : this.filteredItems()[this.selected][0].item.id;
+                }  else {
+                    dependencyValue = this.input;
+                }
+
+                this.resolvedDependencies[this.currentDependency.id] = dependencyValue;
             }
 
             if (this.requiredDependencies.length > 0) {
-                this.search = '';
-                this.searchEngine = 'dependencies';
+                this.input = '';
                 this.currentDependency = this.requiredDependencies.pop();
-                this.searchPlaceholder = this.currentDependency.placeholder;
+                this.inputPlaceholder = this.currentDependency.placeholder;
+                this.searchEngine = (this.currentDependency.type === 'search') ? 'search' : false;
             } else {
                 this.isOpen = false;
                 this.$wire.execute(this.selectedCommand.id, this.resolvedDependencies);

@@ -125,7 +125,7 @@ follows the order in which you add the commands.
 ```php
 SpotlightCommandDependencies::collection()
     ->add(SpotlightCommandDependency::make('team')->setPlaceholder('For which team do you want to create a user?'))
-    ->add(SpotlightCommandDependency::make('foobar')->setPlaceholder('Some other dependency here?'));
+    ->add(SpotlightCommandDependency::make('foobar')->setPlaceholder('Input from user')->setType(SpotlightCommandDependency::INPUT));
 ```
 
 For every dependency, Spotlight will check if a `search{dependency-name}` method exists on the command. This method
@@ -169,7 +169,7 @@ class CreateUser extends SpotlightCommand
     {
         return SpotlightCommandDependencies::collection()
             ->add(SpotlightCommandDependency::make('team')->setPlaceholder('For which team do you want to create a user?'))
-            ->add(SpotlightCommandDependency::make('foobar')->setPlaceholder('Some other dependency here?'));
+            ->add(SpotlightCommandDependency::make('name')->setPlaceholder('How do you want to name this user?')->setType(SpotlightCommandDependency::INPUT));
     }
 
     public function searchTeam($query)
@@ -185,22 +185,10 @@ class CreateUser extends SpotlightCommand
             });
     }
     
-    public function searchFoobar(Team $team, $query)
-    {
-        return $team->foobar()->where('name', 'like', "%$query%")
-            ->get()
-            ->map(function(Foobar $foobar) {
-                return new SpotlightSearchResult(
-                    $foobar->id,
-                    $foobar->name,
-                    sprintf('Create something for %s', $foobar->name)
-                );
-            });
-    }
 
-    public function execute(Spotlight $spotlight, Team $team)
+    public function execute(Spotlight $spotlight, Team $team, string $name)
     {
-        $spotlight->emit('openModal', 'user-create', ['team' => $team->id]);
+        $spotlight->emit('openModal', 'user-create', ['team' => $team->id, 'name' => $name]);
     }
         
 }
