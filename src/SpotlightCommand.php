@@ -6,7 +6,7 @@ abstract class SpotlightCommand
 {
     protected string $name;
 
-    protected string $description;
+    protected string $description = '';
 
     public function dependencies(): ?SpotlightCommandDependencies
     {
