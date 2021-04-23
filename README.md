@@ -217,6 +217,10 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Spotlight::registerCommand(CreateUser::class);
+        
+        // You can also register commands conditionally
+        Spotlight::registerCommandIf($user->isAdmin(), CreateUser::class);
+        Spotlight::registerCommandUnless($user->isSuspended(), CreateUser::class);
     }
 
 }
