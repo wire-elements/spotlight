@@ -2,6 +2,9 @@
 
 All notable changes to `spotlight` will be documented in this file.
 
+## 0.1.5
+- Add option to toggle Spotlight via browser events. `$this->dispatchBrowserEvent('toggle-spotlight');`
+
 ## 0.1.4
 - Add `make:spotlight` command.
 

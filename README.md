@@ -46,6 +46,18 @@ To open the Spotlight input bar you can use one of the following shortcuts:
 - CTRL + /
 - CMD + /
 
+You can customize the keybindings in the configuration file (see below). It's also possible to toggle Spotlight from any other Livewire component or via Javascript.
+
+In any Livewire component you can use the `dispatchBrowserEvent` helper.
+```php
+$this->dispatchBrowserEvent('toggle-spotlight');
+```
+
+You can also use the `$dispatch` helper from Alpine to trigger the same browser event from your markup.
+```html
+<button @click="$dispatch('toggle-spotlight')">Toggle Spotlight</button>
+```
+
 ## Creating your first Spotlight command
 
 You can create your first Spotlight command by creating a new class and have it
