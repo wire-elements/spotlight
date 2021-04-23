@@ -21,6 +21,24 @@ class Spotlight extends Component
         });
     }
 
+    public static function registerCommandIf(bool $condition, string $command): void
+    {
+        if ($condition === false) {
+            return;
+        }
+
+        self::registerCommand($command);
+    }
+
+    public static function registerCommandUnless(bool $condition, string $command): void
+    {
+        if ($condition === true) {
+            return;
+        }
+
+        self::registerCommand($command);
+    }
+
     protected function getCommandById(string $id): ?SpotlightCommand
     {
         return collect(self::$commands)->first(function ($command) use ($id) {
