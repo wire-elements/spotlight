@@ -19,11 +19,28 @@ window.LivewireUISpotlight = (config) => {
             this.dependencySearch = new Fuse([], {threshold: 0.3, keys: ['name', 'description']});
 
             this.$watch('dependencyQueryResults', value => { this.dependencySearch.setCollection(value) });
-            this.$watch('search', value => { if (value.length === 0) selected = 0 });
-            this.$watch('search', value => {
 
+            this.$watch('search', value => {
+                if (value.length === 0) {
+                    this.selected = 0;
+                }
                 if(this.selectedCommand !== null && this.currentDependency !== null){
                     this.$wire.searchDependency(this.selectedCommand.id, this.currentDependency.id, value, this.resolvedDependencies);
+                }
+            });
+
+            this.$watch('isOpen', value => {
+                if (value === false) {
+                    setTimeout(() => {
+                        this.search = '';
+                        this.searchPlaceholder = config.placeholder;
+                        this.searchEngine = 'commands';
+                        this.resolvedDependencies = {};
+                        this.selectedCommand = null;
+                        this.currentDependency = null;
+                        this.selectedCommand = null;
+                        this.requiredDependencies = [];
+                    }, 300);
                 }
             });
         },
@@ -84,17 +101,6 @@ window.LivewireUISpotlight = (config) => {
             } else {
                 this.isOpen = false;
                 this.$wire.execute(this.selectedCommand.id, this.resolvedDependencies);
-
-                setTimeout(() => {
-                    this.search = '';
-                    this.searchPlaceholder = config.placeholder;
-                    this.searchEngine = 'commands';
-                    this.resolvedDependencies = {};
-                    this.selectedCommand = null;
-                    this.currentDependency = null;
-                    this.selectedCommand = null;
-                    this.requiredDependencies = [];
-                }, 300);
             }
         },
         selected: 0,
