@@ -8,6 +8,7 @@
     <div x-data="LivewireUISpotlight({ componentId: '{{ $this->id }}', placeholder: '{{ config('livewire-ui-spotlight.placeholder') }}', commands: {{ $commands }} })"
          x-init="init()"
          x-show="isOpen"
+         x-cloak
          @foreach(config('livewire-ui-spotlight.shortcuts') as $key)
             @keydown.window.prevent.cmd.{{ $key }}="toggleOpen()"
             @keydown.window.prevent.ctrl.{{ $key }}="toggleOpen()"
