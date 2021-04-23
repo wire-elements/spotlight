@@ -53,4 +53,5 @@ return [
     |
     */
     'include_css' => false,
+
 ];
