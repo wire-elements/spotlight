@@ -37,6 +37,13 @@ Add the Livewire directive `@livewire('livewire-ui-spotlight')`:
 </html>
 ```
 
+## Alpine
+Spotlight requires [Alpine](https://github.com/alpinejs/alpine). You can use the official CDN to quickly include Alpine:
+
+```html
+<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+```
+
 ## Opening Spotlight
 
 To open the Spotlight input bar you can use one of the following shortcuts:
@@ -184,13 +191,13 @@ class CreateUser extends SpotlightCommand
                 );
             });
     }
-    
+
 
     public function execute(Spotlight $spotlight, Team $team, string $name)
     {
         $spotlight->emit('openModal', 'user-create', ['team' => $team->id, 'name' => $name]);
     }
-        
+
 }
 ```
 
@@ -219,7 +226,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Spotlight::registerCommand(CreateUser::class);
-        
+
         // You can also register commands conditionally
         Spotlight::registerCommandIf($user->isAdmin(), CreateUser::class);
         Spotlight::registerCommandUnless($user->isSuspended(), CreateUser::class);
