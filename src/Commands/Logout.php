@@ -16,6 +16,5 @@ class Logout extends SpotlightCommand
     {
         $guard->logout();
         $spotlight->redirect('/');
-        
     }
 }
