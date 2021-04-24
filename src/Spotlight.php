@@ -78,7 +78,7 @@ class Spotlight extends Component
         }
     }
 
-    public function render(): View
+    public function render()
     {
         return view('livewire-ui-spotlight::spotlight', [
             'commands' => collect(self::$commands)->map(function (SpotlightCommand $command) {
