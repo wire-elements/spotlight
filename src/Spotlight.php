@@ -79,7 +79,7 @@ class Spotlight extends Component
         }
     }
 
-    public function render(): View | Factory
+    public function render(): View
     {
         return view('livewire-ui-spotlight::spotlight', [
             'commands' => collect(self::$commands)->map(function (SpotlightCommand $command) {
@@ -87,7 +87,7 @@ class Spotlight extends Component
                     'id' => $command->getId(),
                     'name' => $command->getName(),
                     'description' => $command->getDescription(),
-                    'dependencies' => $command->dependencies()?->toArray() ?? [],
+                    'dependencies' => optional($command->dependencies())->toArray() ?? [],
                 ];
             }),
         ]);

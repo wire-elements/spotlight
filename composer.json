@@ -16,7 +16,7 @@
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^7.4|^8.0",
         "illuminate/contracts": "^8.0",
         "livewire-ui/livewire-ui": "^0.1.0",
         "livewire/livewire": "^2.4",

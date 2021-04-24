@@ -4,18 +4,18 @@ namespace LivewireUI\Spotlight;
 
 class SpotlightSearchResult
 {
-    protected mixed $id;
+    protected $id;
     protected string $name;
     protected ?string $description;
 
-    public function __construct(mixed $id, string $name, ?string $description)
+    public function __construct($id, string $name, ?string $description)
     {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
     }
 
-    public function getId(): mixed
+    public function getId()
     {
         return $this->id;
     }
