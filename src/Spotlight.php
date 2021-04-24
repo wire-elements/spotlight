@@ -2,7 +2,6 @@
 
 namespace LivewireUI\Spotlight;
 
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Str;
 use Livewire\Component;
