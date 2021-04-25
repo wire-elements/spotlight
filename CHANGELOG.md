@@ -2,10 +2,12 @@
 
 All notable changes to `spotlight` will be documented in this file.
 
+## Unreleased
+- Add `shouldBeShown` method to `SpotlightCommand` for any custom logic needed for determining whether a command should be shown in the Spotlight component.
+
 ## 0.1.6
 - Add `SpotlightCommandDependency` type support. Defaults to `SpotlightCommandDependency::SEARCH`
 - *Important* The dependency order was incorrect, you need to change your dependency order after updating if you have more than one dependency.
-
 
 ## 0.1.5
 - Add option to toggle Spotlight via browser events. `$this->dispatchBrowserEvent('toggle-spotlight');`

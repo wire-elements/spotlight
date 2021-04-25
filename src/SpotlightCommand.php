@@ -27,4 +27,9 @@ abstract class SpotlightCommand
     {
         return md5(static::class);
     }
+
+    public function shouldBeShown(): bool
+    {
+        return true;
+    }
 }
