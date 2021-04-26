@@ -83,7 +83,13 @@ class Spotlight extends Component
     {
         return view('livewire-ui-spotlight::spotlight', [
             'commands' => collect(self::$commands)
-                ->filter(fn (SpotlightCommand $command) => $command->shouldBeShown())
+                ->filter(function (SpotlightCommand $command) {
+                    if (! method_exists($command, 'shouldBeShown')) {
+                        return true;
+                    }
+
+                    return app()->call([$command, 'shouldBeShown']);
+                })
                 ->map(function (SpotlightCommand $command) {
                     return [
                         'id' => $command->getId(),
