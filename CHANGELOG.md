@@ -3,7 +3,7 @@
 All notable changes to `spotlight` will be documented in this file.
 
 ## Unreleased
-- Add `shouldBeShown` method to `SpotlightCommand` for any custom logic needed for determining whether a command should be shown in the Spotlight component.
+- Add call to `shouldBeShown` method on the `SpotlightCommand` for any custom logic needed for determining whether a command should be shown in the Spotlight component. This includes resolving any dependencies out of the Laravel service container.
 
 ## 0.1.6
 - Add `SpotlightCommandDependency` type support. Defaults to `SpotlightCommandDependency::SEARCH`
