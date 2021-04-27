@@ -235,6 +235,31 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
+If you need to do logic that can't be done in a service provider (for example, any logic that needs to use the currently authenticated user) to determine if your command should be shown in the Spotlight component, you can add a `shouldBeShown` method on your command. You can type-hint any dependencies you need and they'll be resolved out of the container for you. (Note: you will still need to register your command in your config file or in a service provider.)
+
+```php
+use Illuminate\Http\Request;
+use LivewireUI\Spotlight\Spotlight;
+use LivewireUI\Spotlight\SpotlightCommand;
+
+class CreateUser extends SpotlightCommand
+{
+    protected string $name = 'Create user';
+
+    protected string $description = 'Create new team user';
+
+    public function execute(Spotlight $spotlight)
+    {
+        $spotlight->emit('openModal', 'user-create');
+    }
+
+    public function shouldBeShown(Request $request): bool
+    {
+        return $request->user()->can('create user');
+    }
+}
+```
+
 
 ## Configuration
 You can customize the placeholder for Spotlight via the `livewire-ui-spotlight.php` config file. This includes some additional options like including CSS if you don't use TailwindCSS for your application. To publish the config run the vendor:publish command:
