@@ -228,8 +228,8 @@ class AppServiceProvider extends ServiceProvider
         Spotlight::registerCommand(CreateUser::class);
 
         // You can also register commands conditionally
-        Spotlight::registerCommandIf($user->isAdmin(), CreateUser::class);
-        Spotlight::registerCommandUnless($user->isSuspended(), CreateUser::class);
+        Spotlight::registerCommandIf(true, CreateUser::class);
+        Spotlight::registerCommandUnless(false, CreateUser::class);
     }
 
 }
