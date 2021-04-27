@@ -90,6 +90,7 @@ class Spotlight extends Component
 
                     return app()->call([$command, 'shouldBeShown']);
                 })
+                ->values()
                 ->map(function (SpotlightCommand $command) {
                     return [
                         'id' => $command->getId(),
