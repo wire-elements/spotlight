@@ -61,4 +61,15 @@ class {{ class }} extends SpotlightCommand
     {
         $spotlight->redirectRoute('teams.users.create', $team);
     }
+
+    /**
+     * You can provide any custom logic you want to determine whether the
+     * command will be shown in the Spotlight component. If you don't have any
+     * logic you can remove this method. You can type-hint any dependencies you
+     * need and they will be resolved from the container.
+     */
+    public function shouldBeShown(): bool
+    {
+        return true;
+    }
 }
