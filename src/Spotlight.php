@@ -88,6 +88,9 @@ class Spotlight extends Component
                         return true;
                     }
 
+                    /**
+                     * @psalm-suppress InvalidArgument
+                     */
                     return app()->call([$command, 'shouldBeShown']);
                 })
                 ->values()

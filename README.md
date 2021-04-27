@@ -235,7 +235,7 @@ class AppServiceProvider extends ServiceProvider
 }
 ```
 
-If you need to do logic that can't be done in a service provider (for example, any logic that needs to use the currently authenticated user) to determine if your command should be shown in the Spotlight component, you can add a `shouldBeShown` method on your command. You can type-hint any dependencies you need and they'll be resolved out of the container for you. (Note: you will still need to register your command in your config file or in a service provider.)
+Alternatively, you can also conditionally show or hide a command from the command itself. (Note: you will still need to register your command in your config file or in a service provider.) Add the `shouldBeShown` method to your command and add any logic to resolve if the command should be shown. Dependencies are resolved from the container, so you can for example verify if the currently authenticated user has the required permissions to access given command:
 
 ```php
 use Illuminate\Http\Request;
