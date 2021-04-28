@@ -5,7 +5,7 @@
         <style>{!! file_get_contents($cssPath) !!}</style>
     @endisset
 
-    <div x-data="LivewireUISpotlight({ componentId: '{{ $this->id }}', placeholder: '{{ config('livewire-ui-spotlight.placeholder') }}', commands: {{ $commands }} })"
+    <div x-data="LivewireUISpotlight({ componentId: '{{ $this->id }}', placeholder: '{{ __(config('livewire-ui-spotlight.placeholder')) ?? config('livewire-ui-spotlight.placeholder') }}', commands: {{ $commands }} })"
          x-init="init()"
          x-show="isOpen"
          x-cloak
