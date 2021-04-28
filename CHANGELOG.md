@@ -2,6 +2,11 @@
 
 All notable changes to `spotlight` will be documented in this file.
 
+
+## 0.1.8
+- Fuse.js is now included in the Javascript bundle. 
+- You can disable the Javascript in the config file and require the Javascript in your bundler `require('vendor/livewire-ui/spotlight/resources/js/spotlight');`
+
 ## 0.1.7
 - Add call to `shouldBeShown` method on the `SpotlightCommand` for any custom logic needed for determining whether a command should be shown in the Spotlight component. This includes resolving any dependencies out of the Laravel service container.
 
