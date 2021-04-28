@@ -1,6 +1,7 @@
 <div>
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js" defer></script>
-    <script>{!! file_get_contents($jsPath) !!}</script>
+    @isset($jsPath)
+        <script>{!! file_get_contents($jsPath) !!}</script>
+    @endisset
     @isset($cssPath)
         <style>{!! file_get_contents($cssPath) !!}</style>
     @endisset
