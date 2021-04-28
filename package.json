@@ -14,5 +14,8 @@
         "postcss": "^8.2.12",
         "tailwindcss": "^2.1.1",
         "vue-template-compiler": "^2.6.12"
+    },
+    "dependencies": {
+        "fuse.js": "^6.4.6"
     }
 }

@@ -25,7 +25,9 @@ class SpotlightServiceProvider extends PackageServiceProvider
         Livewire::component('livewire-ui-spotlight', Spotlight::class);
 
         View::composer('livewire-ui-spotlight::spotlight', function ($view) {
-            $view->jsPath = __DIR__.'/../public/spotlight.js';
+            if (config('livewire-ui-spotlight.include_js', true)) {
+                $view->jsPath = __DIR__.'/../public/spotlight.js';
+            }
 
             if (config('livewire-ui-spotlight.include_css', false)) {
                 $view->cssPath = __DIR__ . '/../public/spotlight.css';
