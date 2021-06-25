@@ -2,6 +2,9 @@
 
 All notable changes to `spotlight` will be documented in this file.
 
+## 1.0.0
+- Alpine v3 support
+- Make prompt placeholder translatable
 
 ## 0.1.8
 - Fuse.js is now included in the Javascript bundle. 
