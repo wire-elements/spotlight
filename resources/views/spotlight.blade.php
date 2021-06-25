@@ -7,6 +7,7 @@
     @endisset
 
     <div x-data="LivewireUISpotlight({ componentId: '{{ $this->id }}', placeholder: '{{ config('livewire-ui-spotlight.placeholder') }}', commands: {{ $commands }} })"
+         x-init="init()"
          x-show="isOpen"
          x-cloak
          @foreach(config('livewire-ui-spotlight.shortcuts') as $key)
@@ -47,13 +48,13 @@
             </div>
             <div class="border-t border-gray-800" x-show="filteredItems().length > 0" style="display: none;">
                 <ul x-ref="results" style="max-height: 265px;" class="overflow-y-auto">
-                    <template x-for="([{ item: { id, name, description }}, i]) in filteredItems()" :key="id">
+                    <template x-for="(item, i) in filteredItems()" :key>
                         <li>
-                            <button @click="go(id)" class="block w-full text-left px-6 py-3"
+                            <button @click="go(item[0].item.id)" class="block w-full px-6 py-3 text-left"
                                     :class="{ 'bg-gray-700': selected === i, 'hover:bg-gray-800': selected !== i }">
-                                <span x-text="name"
+                                <span x-text="item[0].item.name"
                                       :class="{'text-gray-300': selected !== i, 'text-white': selected === i }"></span>
-                                <span x-text="description" class="ml-1"
+                                <span x-text="item[0].item.description" class="ml-1"
                                       :class="{'text-gray-500': selected !== i, 'text-gray-400': selected === i }"></span>
                             </button>
                         </li>
