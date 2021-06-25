@@ -16,6 +16,7 @@ class SpotlightServiceProvider extends PackageServiceProvider
         $package
             ->name('livewire-ui-spotlight')
             ->hasConfigFile()
+            ->hasTranslations()
             ->hasViews()
             ->hasCommand(MakeSpotlightCommand::class);
     }

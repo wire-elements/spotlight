@@ -209,7 +209,6 @@ You can register commands by adding these to the `livewire-ui-spotlight.php` con
 <?php
 
 return [
-    'placeholder' => 'What do you want to do?',
     'commands' => [
         \App\SpotlightCommands\CreateUser::class
     ]
@@ -262,7 +261,7 @@ class CreateUser extends SpotlightCommand
 
 
 ## Configuration
-You can customize the placeholder for Spotlight via the `livewire-ui-spotlight.php` config file. This includes some additional options like including CSS if you don't use TailwindCSS for your application. To publish the config run the vendor:publish command:
+You can customize Spotlight via the `livewire-ui-spotlight.php` config file. This includes some additional options like including CSS if you don't use TailwindCSS for your application. To publish the config run the vendor:publish command:
 ```shell
 php artisan vendor:publish --tag=livewire-ui-spotlight-config
 ```
@@ -286,17 +285,6 @@ return [
         'k',
         'slash',
     ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Placeholder
-    |--------------------------------------------------------------------------
-    |
-    | Define the text you want to show by default when Spotlight is enabled
-    |
-    */
-
-    'placeholder' => 'What do you want to do?',
 
     /*
     |--------------------------------------------------------------------------
@@ -336,6 +324,20 @@ return [
     |
     */
     'include_js' => true,
+];
+```
+
+If you want to translate or change default the placeholder you will need to publish the translation file.
+
+```shell
+php artisan vendor:publish --tag=livewire-ui-spotlight-translations
+```
+
+```php
+<?php
+
+return [
+    'placeholder' => 'What do you want to do?',
 ];
 ```
 
