@@ -288,7 +288,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Placeholder
+    | Commands
     |--------------------------------------------------------------------------
     |
     | Define which commands you want to make available in Spotlight.
