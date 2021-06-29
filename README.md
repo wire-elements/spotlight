@@ -16,6 +16,11 @@ application. <a href="https://twitter.com/Philo01/status/1380135839263559680?s=2
 
 ## Installation
 
+<a href="https://philo.dev/getting-started-with-laravel-spotlight/"><img src="https://user-images.githubusercontent.com/1133950/123797901-f76b1580-d8e6-11eb-872a-46d11952ef71.png" alt="Laravel Spotlight Tutorial"></a>
+
+Click the image above to read a full article on using the LivewireUI Spotlight package or follow the instructions below.
+
+
 To get started, require the package via Composer:
 
 ```
