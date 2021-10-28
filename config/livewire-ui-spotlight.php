@@ -51,7 +51,7 @@ return [
     |
     | Spotlight will inject the required Javascript in your blade template.
     | If you want to bundle the required Javascript you can set this to false
-    | and add `require('vendor/livewire-ui/spotlight/resources/js/spotlight');`
+    | run `npm install --save fuse.js` and add `require('vendor/livewire-ui/spotlight/resources/js/spotlight');`
     | to your script bundler like webpack.
     |
     */
