@@ -354,7 +354,7 @@ return [
 
 ## License
 
-Livewire UI is open-sourced software licensed under the [MIT license](LICENSE.md).
+Wire Elements is open-sourced software licensed under the [MIT license](LICENSE.md).
 
 ## Manage your Laravel Horizon Instances With Observer
 <a href="https://observer.dev/"><img src="https://observer.dev/img/twitter-card.jpg" width="500" alt="" /></a>
