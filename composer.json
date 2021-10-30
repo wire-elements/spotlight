@@ -1,5 +1,5 @@
 {
-    "name": "livewire-ui/spotlight",
+    "name": "wire-elements/spotlight",
     "description": "Livewire component that provides Spotlight/Alfred-like functionality to your Laravel application.",
     "keywords": [
         "livewire-ui",
