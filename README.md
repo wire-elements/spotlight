@@ -3,28 +3,29 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/livewire-ui/spotlight/actions"><img src="https://github.com/livewire-ui/spotlight/actions/workflows/run-tests.yml/badge.svg" alt="Build Status"></a>
+<a href="https://github.com/wire-elements/spotlight/actions"><img src="https://github.com/wire-elements/spotlight/actions/workflows/run-tests.yml/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/wire-elements/spotlight"><img src="https://img.shields.io/packagist/dt/wire-elements/spotlight" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/livewire-ui/spotlight"><img src="https://img.shields.io/packagist/dt/livewire-ui/spotlight" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/livewire-ui/spotlight"><img src="https://img.shields.io/packagist/v/livewire-ui/spotlight" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/livewire-ui/spotlight"><img src="https://img.shields.io/packagist/l/livewire-ui/spotlight" alt="License"></a>
+<a href="https://packagist.org/packages/wire-elements/spotlight"><img src="https://img.shields.io/packagist/v/wire-elements/spotlight" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/wire-elements/spotlight"><img src="https://img.shields.io/packagist/l/wire-elements/spotlight" alt="License"></a>
 </p>
 
-## About LivewireUI Spotlight
+## About Wire Elements Spotlight
 
-LivewireUI Spotlight is a Livewire component that provides Spotlight/Alfred-like functionality to your Laravel
+Wire Elements Spotlight is a Livewire component that provides Spotlight/Alfred-like functionality to your Laravel
 application. <a href="https://twitter.com/Philo01/status/1380135839263559680?s=20">View demo video</a>.
 
 ## Installation
 
 <a href="https://philo.dev/getting-started-with-laravel-spotlight/"><img src="https://user-images.githubusercontent.com/1133950/123797901-f76b1580-d8e6-11eb-872a-46d11952ef71.png" alt="Laravel Spotlight Tutorial"></a>
 
-Click the image above to read a full article on using the LivewireUI Spotlight package or follow the instructions below.
+Click the image above to read a full article on using the Wire Elements Spotlight package or follow the instructions below.
 
 
 To get started, require the package via Composer:
 
 ```
-composer require livewire-ui/spotlight
+composer require wire-elements/spotlight
 ```
 
 ## Livewire directive
