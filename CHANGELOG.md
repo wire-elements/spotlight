@@ -2,6 +2,9 @@
 
 All notable changes to `spotlight` will be documented in this file.
 
+## 1.1.0
+- Add ability to define synonyms when searching for commands
+
 ## 1.0.0
 - Alpine v3 support
 - Make prompt placeholder translatable
