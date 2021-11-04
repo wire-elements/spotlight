@@ -3,23 +3,29 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/livewire-ui/spotlight/actions"><img src="https://github.com/livewire-ui/spotlight/actions/workflows/run-tests.yml/badge.svg" alt="Build Status"></a>
+<a href="https://github.com/wire-elements/spotlight/actions"><img src="https://github.com/wire-elements/spotlight/actions/workflows/run-tests.yml/badge.svg" alt="Build Status"></a>
+<a href="https://packagist.org/packages/wire-elements/spotlight"><img src="https://img.shields.io/packagist/dt/wire-elements/spotlight" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/livewire-ui/spotlight"><img src="https://img.shields.io/packagist/dt/livewire-ui/spotlight" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/livewire-ui/spotlight"><img src="https://img.shields.io/packagist/v/livewire-ui/spotlight" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/livewire-ui/spotlight"><img src="https://img.shields.io/packagist/l/livewire-ui/spotlight" alt="License"></a>
+<a href="https://packagist.org/packages/wire-elements/spotlight"><img src="https://img.shields.io/packagist/v/wire-elements/spotlight" alt="Latest Stable Version"></a>
+<a href="https://packagist.org/packages/wire-elements/spotlight"><img src="https://img.shields.io/packagist/l/wire-elements/spotlight" alt="License"></a>
 </p>
 
-## About LivewireUI Spotlight
+## About Wire Elements Spotlight
 
-LivewireUI Spotlight is a Livewire component that provides Spotlight/Alfred-like functionality to your Laravel
+Wire Elements Spotlight is a Livewire component that provides Spotlight/Alfred-like functionality to your Laravel
 application. <a href="https://twitter.com/Philo01/status/1380135839263559680?s=20">View demo video</a>.
 
 ## Installation
 
+<a href="https://philo.dev/getting-started-with-laravel-spotlight/"><img src="https://user-images.githubusercontent.com/1133950/123797901-f76b1580-d8e6-11eb-872a-46d11952ef71.png" alt="Laravel Spotlight Tutorial"></a>
+
+Click the image above to read a full article on using the Wire Elements Spotlight package or follow the instructions below.
+
+
 To get started, require the package via Composer:
 
 ```
-composer require livewire-ui/spotlight
+composer require wire-elements/spotlight
 ```
 
 ## Livewire directive
@@ -41,7 +47,7 @@ Add the Livewire directive `@livewire('livewire-ui-spotlight')`:
 Spotlight requires [Alpine](https://github.com/alpinejs/alpine). You can use the official CDN to quickly include Alpine:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+<script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 ```
 
 ## Opening Spotlight
@@ -209,7 +215,6 @@ You can register commands by adding these to the `livewire-ui-spotlight.php` con
 <?php
 
 return [
-    'placeholder' => 'What do you want to do?',
     'commands' => [
         \App\SpotlightCommands\CreateUser::class
     ]
@@ -228,10 +233,35 @@ class AppServiceProvider extends ServiceProvider
         Spotlight::registerCommand(CreateUser::class);
 
         // You can also register commands conditionally
-        Spotlight::registerCommandIf($user->isAdmin(), CreateUser::class);
-        Spotlight::registerCommandUnless($user->isSuspended(), CreateUser::class);
+        Spotlight::registerCommandIf(true, CreateUser::class);
+        Spotlight::registerCommandUnless(false, CreateUser::class);
     }
 
+}
+```
+
+Alternatively, you can also conditionally show or hide a command from the command itself. (Note: you will still need to register your command in your config file or in a service provider.) Add the `shouldBeShown` method to your command and add any logic to resolve if the command should be shown. Dependencies are resolved from the container, so you can for example verify if the currently authenticated user has the required permissions to access given command:
+
+```php
+use Illuminate\Http\Request;
+use LivewireUI\Spotlight\Spotlight;
+use LivewireUI\Spotlight\SpotlightCommand;
+
+class CreateUser extends SpotlightCommand
+{
+    protected string $name = 'Create user';
+
+    protected string $description = 'Create new team user';
+
+    public function execute(Spotlight $spotlight)
+    {
+        $spotlight->emit('openModal', 'user-create');
+    }
+
+    public function shouldBeShown(Request $request): bool
+    {
+        return $request->user()->can('create user');
+    }
 }
 ```
 
@@ -262,7 +292,7 @@ class CreateUser extends SpotlightCommand
 
 
 ## Configuration
-You can customize the placeholder for Spotlight via the `livewire-ui-spotlight.php` config file. This includes some additional options like including CSS if you don't use TailwindCSS for your application. To publish the config run the vendor:publish command:
+You can customize Spotlight via the `livewire-ui-spotlight.php` config file. This includes some additional options like including CSS if you don't use TailwindCSS for your application. To publish the config run the vendor:publish command:
 ```shell
 php artisan vendor:publish --tag=livewire-ui-spotlight-config
 ```
@@ -289,18 +319,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Placeholder
-    |--------------------------------------------------------------------------
-    |
-    | Define the text you want to show by default when Spotlight is enabled
-    |
-    */
-
-    'placeholder' => 'What do you want to do?',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Placeholder
+    | Commands
     |--------------------------------------------------------------------------
     |
     | Define which commands you want to make available in Spotlight.
@@ -323,6 +342,33 @@ return [
     |
     */
     'include_css' => false,
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Include JS
+    |--------------------------------------------------------------------------
+    |
+    | Spotlight will inject the required Javascript in your blade template.
+    | If you want to bundle the required Javascript you can set this to false
+    | run `npm install --save fuse.js` and add `require('vendor/livewire-ui/spotlight/resources/js/spotlight');`
+    | to your script bundler like webpack.
+    |
+    */
+    'include_js' => true,
+];
+```
+
+If you want to translate or change default the placeholder you will need to publish the translation file.
+
+```shell
+php artisan vendor:publish --tag=livewire-ui-spotlight-translations
+```
+
+```php
+<?php
+
+return [
+    'placeholder' => 'What do you want to do?',
 ];
 ```
 
@@ -333,4 +379,9 @@ return [
 
 ## License
 
-Livewire UI is open-sourced software licensed under the [MIT license](LICENSE.md).
+Wire Elements is open-sourced software licensed under the [MIT license](LICENSE.md).
+
+## Manage your Laravel Horizon Instances With Observer
+<a href="https://observer.dev/"><img src="https://observer.dev/img/twitter-card.jpg" width="500" alt="" /></a>
+
+All your favorite Laravel Horizon features (and a few new ones) are packed into a single desktop application. A must-have productivity booster for every Laravel developer. <a href="https://observer.dev/">Click here to get Observer</a>

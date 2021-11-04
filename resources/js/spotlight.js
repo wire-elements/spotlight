@@ -1,3 +1,5 @@
+import Fuse from 'fuse.js'
+
 window.LivewireUISpotlight = (config) => {
     return {
         inputPlaceholder: config.placeholder,
