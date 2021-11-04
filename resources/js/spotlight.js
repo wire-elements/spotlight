@@ -17,8 +17,8 @@ window.LivewireUISpotlight = (config) => {
         resolvedDependencies: {},
 
         init() {
-            this.commandSearch = new Fuse(this.commands, {threshold: 0.3, keys: ['name', 'description']});
-            this.dependencySearch = new Fuse([], {threshold: 0.3, keys: ['name', 'description']});
+            this.commandSearch = new Fuse(this.commands, {threshold: 0.3, keys: ['name', 'description', 'synonyms']});
+            this.dependencySearch = new Fuse([], {threshold: 0.3, keys: ['name', 'description', 'synonyms']});
 
             this.$watch('dependencyQueryResults', value => { this.dependencySearch.setCollection(value) });
 

@@ -60,6 +60,7 @@ class Spotlight extends Component
                         'id' => $result->getId(),
                         'name' => $result->getName(),
                         'description' => $result->getDescription(),
+                        'synonyms' => $result->getSynonyms(),
                     ];
                 })->toArray();
         }
@@ -99,6 +100,7 @@ class Spotlight extends Component
                         'id' => $command->getId(),
                         'name' => $command->getName(),
                         'description' => $command->getDescription(),
+                        'synonyms' => $command->getSynonyms(),
                         'dependencies' => $command->dependencies()?->toArray() ?? [],
                     ];
                 }),
