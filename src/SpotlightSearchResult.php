@@ -7,14 +7,12 @@ class SpotlightSearchResult
     protected mixed $id;
     protected string $name;
     protected ?string $description;
-    protected array $synonyms = [];
 
-    public function __construct(mixed $id, string $name, ?string $description, array $synonyms = [])
+    public function __construct(mixed $id, string $name, ?string $description)
     {
         $this->id = $id;
         $this->name = $name;
         $this->description = $description;
-        $this->synonyms = $synonyms;
     }
 
     public function getId(): mixed
@@ -30,10 +28,5 @@ class SpotlightSearchResult
     public function getDescription(): ?string
     {
         return $this->description;
-    }
-
-    public function getSynonyms(): array
-    {
-        return $this->synonyms;
     }
 }
