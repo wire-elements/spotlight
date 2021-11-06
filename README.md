@@ -21,10 +21,9 @@ application. <a href="https://twitter.com/Philo01/status/1380135839263559680?s=2
 
 Click the image above to read a full article on using the Wire Elements Spotlight package or follow the instructions below.
 
-
 To get started, require the package via Composer:
 
-```
+```shell
 composer require wire-elements/spotlight
 ```
 
@@ -33,7 +32,6 @@ composer require wire-elements/spotlight
 Add the Livewire directive `@livewire('livewire-ui-spotlight')`:
 
 ```html
-
 <html>
 <body>
 <!-- content -->
@@ -44,6 +42,7 @@ Add the Livewire directive `@livewire('livewire-ui-spotlight')`:
 ```
 
 ## Alpine
+
 Spotlight requires [Alpine](https://github.com/alpinejs/alpine). You can use the official CDN to quickly include Alpine:
 
 ```html
@@ -62,11 +61,13 @@ To open the Spotlight input bar you can use one of the following shortcuts:
 You can customize the keybindings in the configuration file (see below). It's also possible to toggle Spotlight from any other Livewire component or via Javascript.
 
 In any Livewire component you can use the `dispatchBrowserEvent` helper.
+
 ```php
 $this->dispatchBrowserEvent('toggle-spotlight');
 ```
 
 You can also use the `$dispatch` helper from Alpine to trigger the same browser event from your markup.
+
 ```html
 <button @click="$dispatch('toggle-spotlight')">Toggle Spotlight</button>
 ```
@@ -80,10 +81,6 @@ name and description will be visible when searching through commands.
 To help you get started you can use the `php artisan make:spotlight <command-name>` command.
 
 ```php
-<?php
-
-namespace LivewireUI\Spotlight\Commands;
-
 use LivewireUI\Spotlight\SpotlightCommand;
 
 class Logout extends SpotlightCommand
@@ -99,10 +96,6 @@ The `execute` method is called when a command is chosen, and the command has no 
 look at the `Logout` command `execute` method:
 
 ```php
-<?php
-
-namespace LivewireUI\Spotlight\Commands;
-
 use Illuminate\Contracts\Auth\StatefulGuard;
 use LivewireUI\Spotlight\Spotlight;
 use LivewireUI\Spotlight\SpotlightCommand;
@@ -124,6 +117,35 @@ class Logout extends SpotlightCommand
 As you can see, you can type-hint your dependencies and have them resolved by Laravel. If you
 type-hint `Spotlight $spotlight`, you will get access to the Livewire Spotlight component. This gives you access to all
 the Livewire helpers, so you can redirect users, emit events, you name it.
+
+## How to define search synonyms
+
+Sometimes you may want to include additional search terms (often called synonyms) when searching for commands. This can be useful if users refer to something by multiple names or the command may include more than one piece of functionality (for example, a settings page that has multiple types of settings on it). You can add as many synonyms as you want directly on a command by defining a `$synonyms` array:
+
+```php
+use LivewireUI\Spotlight\Spotlight;
+use LivewireUI\Spotlight\SpotlightCommand;
+
+class ViewBillingSettings extends SpotlightCommand
+{
+    protected string $name = 'View Billing Settings';
+
+    protected string $description = 'Update your billing settings';
+
+    protected array $synonyms = [
+        'subscription',
+        'credit card',
+        'payment',
+    ];
+
+    public function execute(Spotlight $spotlight): void
+    {
+        $spotlight->redirect('/settings/billing');
+    }
+}
+```
+
+When searching, users can now enter "credit card" and they'll be shown a search result for the View Billing Settings command.
 
 ## How to define command dependencies
 
@@ -198,12 +220,10 @@ class CreateUser extends SpotlightCommand
             });
     }
 
-
     public function execute(Spotlight $spotlight, Team $team, string $name)
     {
         $spotlight->emit('openModal', 'user-create', ['team' => $team->id, 'name' => $name]);
     }
-
 }
 ```
 
@@ -265,9 +285,36 @@ class CreateUser extends SpotlightCommand
 }
 ```
 
+If you need to do logic that can't be done in a service provider (for example, any logic that needs to use the currently authenticated user) to determine if your command should be shown in the Spotlight component, you can add a `shouldBeShown` method on your command. You can type-hint any dependencies you need and they'll be resolved out of the container for you. (Note: you will still need to register your command in your config file or in a service provider.)
+
+```php
+use Illuminate\Http\Request;
+use LivewireUI\Spotlight\Spotlight;
+use LivewireUI\Spotlight\SpotlightCommand;
+
+class CreateUser extends SpotlightCommand
+{
+    protected string $name = 'Create user';
+
+    protected string $description = 'Create new team user';
+
+    public function execute(Spotlight $spotlight)
+    {
+        $spotlight->emit('openModal', 'user-create');
+    }
+
+    public function shouldBeShown(Request $request): bool
+    {
+        return $request->user()->can('create user');
+    }
+}
+```
+
 
 ## Configuration
-You can customize Spotlight via the `livewire-ui-spotlight.php` config file. This includes some additional options like including CSS if you don't use TailwindCSS for your application. To publish the config run the vendor:publish command:
+
+You can customize Spotlight via the `livewire-ui-spotlight.php` config file. This includes some additional options like including CSS if you don't use TailwindCSS for your application. To publish the config run the `vendor:publish` command:
+
 ```shell
 php artisan vendor:publish --tag=livewire-ui-spotlight-config
 ```
@@ -317,7 +364,7 @@ return [
     |
     */
     'include_css' => false,
-    
+
     /*
     |--------------------------------------------------------------------------
     | Include JS
@@ -357,6 +404,7 @@ return [
 Wire Elements is open-sourced software licensed under the [MIT license](LICENSE.md).
 
 ## Manage your Laravel Horizon Instances With Observer
+
 <a href="https://observer.dev/"><img src="https://observer.dev/img/twitter-card.jpg" width="500" alt="" /></a>
 
 All your favorite Laravel Horizon features (and a few new ones) are packed into a single desktop application. A must-have productivity booster for every Laravel developer. <a href="https://observer.dev/">Click here to get Observer</a>

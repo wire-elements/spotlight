@@ -21,6 +21,12 @@ class {{ class }} extends SpotlightCommand
     protected string $description = 'Redirect to user';
 
     /**
+     * You can define any number of additional search terms (also known as synonyms)
+     * to be used when searching for this command.
+     */
+    protected array $synonyms = [];
+
+    /**
      * Defining dependencies is optional. If you don't have any dependencies you can remove this method.
      * Dependencies are asked from your user in the order you add the dependencies.
      */
