@@ -386,6 +386,12 @@ If you want to translate or change default the placeholder you will need to publ
 php artisan vendor:publish --tag=livewire-ui-spotlight-translations
 ```
 
+You may also change the default placeholder text at runtime
+
+```php
+@livewire('livewire-ui-spotlight', ['placeholderOverride' => 'Some text that overrides the language file.'])
+```
+
 ```php
 <?php
 
