@@ -55,13 +55,8 @@ class Spotlight extends Component
             $params = array_merge(['query' => $query], (array) $resolvedDependencies);
 
             $this->dependencyQueryResults = collect(ImplicitlyBoundMethod::call(app(), [$command, $method], $params))
-                ->map(function (SpotlightSearchResult $result) {
-                    return [
-                        'id' => $result->getId(),
-                        'name' => $result->getName(),
-                        'description' => $result->getDescription(),
-                    ];
-                })->toArray();
+                ->map(fn (SpotlightSearchResult $result) => $result->toArray())
+                ->toArray();
         }
     }
 
