@@ -19,18 +19,7 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Placeholder
-    |--------------------------------------------------------------------------
-    |
-    | Define the text you want to show by default when Spotlight is enabled
-    |
-    */
-
-    'placeholder' => 'What do you want to do?',
-
-    /*
-    |--------------------------------------------------------------------------
-    | Placeholder
+    | Commands
     |--------------------------------------------------------------------------
     |
     | Define which commands you want to make available in Spotlight.
@@ -53,5 +42,19 @@ return [
     |
     */
     'include_css' => false,
+
+
+    /*
+    |--------------------------------------------------------------------------
+    | Include JS
+    |--------------------------------------------------------------------------
+    |
+    | Spotlight will inject the required Javascript in your blade template.
+    | If you want to bundle the required Javascript you can set this to false
+    | run `npm install --save fuse.js` and add `require('vendor/livewire-ui/spotlight/resources/js/spotlight');`
+    | to your script bundler like webpack.
+    |
+    */
+    'include_js' => true,
 
 ];
