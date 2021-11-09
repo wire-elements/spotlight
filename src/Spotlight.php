@@ -81,14 +81,27 @@ class Spotlight extends Component
     public function render()
     {
         return view('livewire-ui-spotlight::spotlight', [
-            'commands' => collect(self::$commands)->map(function (SpotlightCommand $command) {
-                return [
-                    'id' => $command->getId(),
-                    'name' => $command->getName(),
-                    'description' => $command->getDescription(),
-                    'dependencies' => optional($command->dependencies())->toArray() ?? [],
-                ];
-            }),
+            'commands' => collect(self::$commands)
+                ->filter(function (SpotlightCommand $command) {
+                    if (! method_exists($command, 'shouldBeShown')) {
+                        return true;
+                    }
+
+                    /**
+                     * @psalm-suppress InvalidArgument
+                     */
+                    return app()->call([$command, 'shouldBeShown']);
+                })
+                ->values()
+                ->map(function (SpotlightCommand $command) {
+                    return [
+                        'id' => $command->getId(),
+                        'name' => $command->getName(),
+                        'description' => $command->getDescription(),
+                        'synonyms' => $command->getSynonyms(),
+                        'dependencies' => optional($command->dependencies())->toArray() ?? [],
+                    ];
+                }),
         ]);
     }
 }
