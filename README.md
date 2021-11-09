@@ -389,7 +389,7 @@ php artisan vendor:publish --tag=livewire-ui-spotlight-translations
 You may also change the default placeholder text at runtime
 
 ```php
-@livewire('livewire-ui-spotlight', ['placeholderOverride' => 'Some text that overrides the language file.'])
+@livewire('livewire-ui-spotlight', ['placeholder' => 'Some text that overrides the language file.'])
 ```
 
 ```php
