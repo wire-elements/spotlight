@@ -1,11 +1,12 @@
 <div>
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js/dist/fuse.js" defer></script>
-    <script>{!! file_get_contents($jsPath) !!}</script>
+    @isset($jsPath)
+        <script>{!! file_get_contents($jsPath) !!}</script>
+    @endisset
     @isset($cssPath)
         <style>{!! file_get_contents($cssPath) !!}</style>
     @endisset
 
-    <div x-data="LivewireUISpotlight({ componentId: '{{ $this->id }}', placeholder: '{{ config('livewire-ui-spotlight.placeholder') }}', commands: {{ $commands }} })"
+    <div x-data="LivewireUISpotlight({ componentId: '{{ $this->id }}', placeholder: '{{ trans('livewire-ui-spotlight::spotlight.placeholder') }}', commands: {{ $commands }} })"
          x-init="init()"
          x-show="isOpen"
          x-cloak
@@ -23,7 +24,7 @@
             <div class="absolute inset-0 bg-gray-900 opacity-50"></div>
         </div>
 
-        <div @click.away="isOpen = false" x-show="isOpen" x-transition:enter="ease-out duration-200"
+        <div @click.outside="isOpen = false" x-show="isOpen" x-transition:enter="ease-out duration-200"
              x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
              x-transition:leave="ease-in duration-150" x-transition:leave-start="opacity-100 scale-100"
              x-transition:leave-end="opacity-0 scale-95"

@@ -8,6 +8,8 @@ abstract class SpotlightCommand
 
     protected string $description = '';
 
+    protected array $synonyms = [];
+
     public function dependencies(): ?SpotlightCommandDependencies
     {
         return null;
@@ -21,6 +23,11 @@ abstract class SpotlightCommand
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getSynonyms(): array
+    {
+        return $this->synonyms;
     }
 
     public function getId(): string
