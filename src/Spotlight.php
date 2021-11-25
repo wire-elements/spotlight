@@ -60,6 +60,7 @@ class Spotlight extends Component
                         'id' => $result->getId(),
                         'name' => $result->getName(),
                         'description' => $result->getDescription(),
+                        'synonyms' => $result->getSynonyms(),
                     ];
                 })->toArray();
         }
