@@ -99,6 +99,7 @@ class Spotlight extends Component
                         'id' => $command->getId(),
                         'name' => $command->getName(),
                         'description' => $command->getDescription(),
+                        'synonyms' => $command->getSynonyms(),
                         'dependencies' => $command->dependencies()?->toArray() ?? [],
                     ];
                 }),

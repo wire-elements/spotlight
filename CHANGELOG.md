@@ -2,12 +2,15 @@
 
 All notable changes to `spotlight` will be documented in this file.
 
+## 1.1.0
+- Add ability to define synonyms when searching for commands
+
 ## 1.0.0
 - Alpine v3 support
 - Make prompt placeholder translatable
 
 ## 0.1.8
-- Fuse.js is now included in the Javascript bundle. 
+- Fuse.js is now included in the Javascript bundle.
 - You can disable the Javascript in the config file and require the Javascript in your bundler `require('vendor/livewire-ui/spotlight/resources/js/spotlight');`
 
 ## 0.1.7
