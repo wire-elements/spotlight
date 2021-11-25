@@ -17,14 +17,14 @@
          @keydown.window.escape="isOpen = false"
          @toggle-spotlight.window="toggleOpen()"
          class="fixed z-50 px-4 pt-16 flex items-start justify-center inset-0 sm:pt-24">
-        <div x-show="isOpen" x-transition:enter="ease-out duration-200" x-transition:enter-start="opacity-0"
+        <div x-show="isOpen" @click="isOpen = false" x-transition:enter="ease-out duration-200" x-transition:enter-start="opacity-0"
              x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-150"
              x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
              class="fixed inset-0 transition-opacity">
             <div class="absolute inset-0 bg-gray-900 opacity-50"></div>
         </div>
 
-        <div @click.outside="isOpen = false" x-show="isOpen" x-transition:enter="ease-out duration-200"
+        <div x-show="isOpen" x-transition:enter="ease-out duration-200"
              x-transition:enter-start="opacity-0 scale-95" x-transition:enter-end="opacity-100 scale-100"
              x-transition:leave="ease-in duration-150" x-transition:leave-start="opacity-100 scale-100"
              x-transition:leave-end="opacity-0 scale-95"

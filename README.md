@@ -204,7 +204,13 @@ class CreateUser extends SpotlightCommand
     {
         return SpotlightCommandDependencies::collection()
             ->add(SpotlightCommandDependency::make('team')->setPlaceholder('For which team do you want to create a user?'))
-            ->add(SpotlightCommandDependency::make('name')->setPlaceholder('How do you want to name this user?')->setType(SpotlightCommandDependency::INPUT));
+            ->add(SpotlightCommandDependency::make('foobar')->setPlaceholder('Search for second dependency')
+            );
+    }
+
+    public function searchFoobar($query, User $user)
+    {
+        // Given Foobar is the second dependency it will have access to any resolved depedencies defined earlier. In this case we can access the User which was chosen.
     }
 
     public function searchTeam($query)
@@ -392,6 +398,12 @@ php artisan vendor:publish --tag=livewire-ui-spotlight-translations
 return [
     'placeholder' => 'What do you want to do?',
 ];
+```
+
+If you want to change the spotlight view, you can also publish the views.
+
+```shell
+php artisan vendor:publish --tag=livewire-ui-spotlight-views
 ```
 
 ## Credits
