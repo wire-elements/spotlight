@@ -16,6 +16,8 @@
          @endforeach
          @keydown.window.escape="isOpen = false"
          @toggle-spotlight.window="toggleOpen()"
+         @go-spotlight.window="go($event.detail)"
+         @prefill-spotlight.window="input = $event.detail"
          class="fixed z-50 px-4 pt-16 flex items-start justify-center inset-0 sm:pt-24">
         <div x-show="isOpen" @click="isOpen = false" x-transition:enter="ease-out duration-200" x-transition:enter-start="opacity-0"
              x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-150"
