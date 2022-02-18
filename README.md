@@ -3,7 +3,6 @@
 </p>
 
 <p align="center">
-<a href="https://github.com/wire-elements/spotlight/actions"><img src="https://github.com/wire-elements/spotlight/actions/workflows/run-tests.yml/badge.svg" alt="Build Status"></a>
 <a href="https://packagist.org/packages/wire-elements/spotlight"><img src="https://img.shields.io/packagist/dt/wire-elements/spotlight" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/livewire-ui/spotlight"><img src="https://img.shields.io/packagist/dt/livewire-ui/spotlight" alt="Total Downloads"></a>
 <a href="https://packagist.org/packages/wire-elements/spotlight"><img src="https://img.shields.io/packagist/v/wire-elements/spotlight" alt="Latest Stable Version"></a>
