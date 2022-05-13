@@ -10,6 +10,8 @@ use Livewire\ImplicitlyBoundMethod;
 
 class Spotlight extends Component
 {
+    public string $placeholder;
+
     public static array $commands = [];
 
     public array $dependencyQueryResults = [];
