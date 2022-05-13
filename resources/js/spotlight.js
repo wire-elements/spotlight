@@ -62,10 +62,18 @@ window.LivewireUISpotlight = (config) => {
         input: '',
         filteredItems() {
             if (this.searchEngine === 'commands') {
+                if (! this.input) {
+                    return this.commandSearch.getIndex().docs.map((item, i) => [{item: item}, i]);
+                }
+
                 return this.commandSearch.search(this.input).map((item, i) => [item, i])
             }
 
             if (this.searchEngine === 'search') {
+                if (! this.input) {
+                    return this.dependencySearch.getIndex().docs.map((item, i) => [{item: item}, i]);
+                }
+
                 return this.dependencySearch.search(this.input).map((item, i) => [item, i])
             }
 
