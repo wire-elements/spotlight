@@ -58,4 +58,15 @@ return [
     */
     'include_js' => true,
 
+    /*
+    |--------------------------------------------------------------------------
+    | Show results without input
+    |--------------------------------------------------------------------------
+    |
+    | Whether to show command search results without
+    | having to type anything in the search input.
+    |
+    */
+    'show_results_without_input' => false,
+
 ];
