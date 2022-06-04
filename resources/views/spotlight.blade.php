@@ -6,7 +6,12 @@
         <style>{!! file_get_contents($cssPath) !!}</style>
     @endisset
 
-    <div x-data="LivewireUISpotlight({ componentId: '{{ $this->id }}', placeholder: '{{ trans('livewire-ui-spotlight::spotlight.placeholder') }}', commands: {{ $commands }} })"
+    <div x-data="LivewireUISpotlight({
+        componentId: '{{ $this->id }}',
+        placeholder: '{{ trans('livewire-ui-spotlight::spotlight.placeholder') }}',
+        commands: {{ $commands }},
+        showResultsWithoutInput: '{{ config('livewire-ui-spotlight.show_results_without_input') }}',
+    })"
          x-init="init()"
          x-show="isOpen"
          x-cloak

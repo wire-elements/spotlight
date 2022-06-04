@@ -16,6 +16,8 @@ window.LivewireUISpotlight = (config) => {
         currentDependency: null,
         resolvedDependencies: {},
 
+        showResultsWithoutInput: config.showResultsWithoutInput,
+
         init() {
             this.commandSearch = new Fuse(this.commands, {threshold: 0.3, keys: ['name', 'description', 'synonyms']});
             this.dependencySearch = new Fuse([], {threshold: 0.3, keys: ['name', 'description', 'synonyms']});
@@ -62,10 +64,18 @@ window.LivewireUISpotlight = (config) => {
         input: '',
         filteredItems() {
             if (this.searchEngine === 'commands') {
+                if (! this.input && this.showResultsWithoutInput) {
+                    return this.commandSearch.getIndex().docs.map((item, i) => [{item: item}, i]);
+                }
+
                 return this.commandSearch.search(this.input).map((item, i) => [item, i])
             }
 
             if (this.searchEngine === 'search') {
+                if (! this.input && this.showResultsWithoutInput) {
+                    return this.dependencySearch.getIndex().docs.map((item, i) => [{item: item}, i]);
+                }
+
                 return this.dependencySearch.search(this.input).map((item, i) => [item, i])
             }
 
