@@ -32,6 +32,6 @@ abstract class SpotlightCommand
 
     public function getId(): string
     {
-        return md5(static::class);
+        return md5($this->name);
     }
 }
