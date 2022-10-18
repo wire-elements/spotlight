@@ -184,7 +184,7 @@ Spotlight expects a collection of `SpotlightSearchResult` objects. The `Spotligh
 the result identifier, name and description.
 
 Every dependency will have access to the already defined dependencies. So in the example below, you can see
-that `searchFoobar` has access to the `Team the user has chosen. This allows for scoped dependency searching.
+that `searchFoobar` has access to the `Team` the user has chosen. This allows for scoped dependency searching.
 
 ```php
 use LivewireUI\Spotlight\Spotlight;
@@ -207,9 +207,9 @@ class CreateUser extends SpotlightCommand
             );
     }
 
-    public function searchFoobar($query, User $user)
+    public function searchFoobar($query, Team $team)
     {
-        // Given Foobar is the second dependency it will have access to any resolved depedencies defined earlier. In this case we can access the User which was chosen.
+        // Given Foobar is the second dependency it will have access to any resolved depedencies defined earlier. In this case we can access the Team which was chosen.
     }
 
     public function searchTeam($query)
