@@ -13,7 +13,7 @@
         showResultsWithoutInput: '{{ config('livewire-ui-spotlight.show_results_without_input') }}',
     })"
          x-init="init()"
-         x-show="isOpen"
+         x-show.important="isOpen"
          x-cloak
          @foreach(config('livewire-ui-spotlight.shortcuts') as $key)
             @keydown.window.prevent.cmd.{{ $key }}="toggleOpen()"
