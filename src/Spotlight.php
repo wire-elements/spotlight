@@ -98,8 +98,8 @@ class Spotlight extends Component
                 ->map(function (SpotlightCommand $command) {
                     return [
                         'id' => $command->getId(),
-                        'name' => $command->getName(),
-                        'description' => $command->getDescription(),
+                        'name' => trans($command->getName()),
+                        'description' => trans($command->getDescription()),
                         'synonyms' => $command->getSynonyms(),
                         'dependencies' => $command->dependencies()?->toArray() ?? [],
                     ];
