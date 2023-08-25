@@ -6,19 +6,19 @@
         "laravel",
         "spotlight"
     ],
-    "homepage": "https://github.com/livewire-ui/spotlight",
+    "homepage": "https://github.com/wire-elements/spotlight",
     "license": "MIT",
     "authors": [
         {
             "name": "Philo Hermans",
-            "email": "me@philohermans.com",
+            "email": "support@wire-elements.dev",
             "role": "Developer"
         }
     ],
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "illuminate/contracts": "^8.0|^9.0|^10.0",
-        "livewire/livewire": "^2.4",
+        "livewire/livewire": "^3.0",
         "spatie/laravel-package-tools": "^1.4.3"
     },
     "require-dev": {

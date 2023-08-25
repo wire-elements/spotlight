@@ -40,7 +40,7 @@ Add the Livewire directive `@livewire('livewire-ui-spotlight')`:
 </html>
 ```
 
-## Alpine
+## Alpine (only when using Livewire v2)
 
 Spotlight requires [Alpine](https://github.com/alpinejs/alpine). You can use the official CDN to quickly include Alpine:
 
@@ -59,10 +59,14 @@ To open the Spotlight input bar you can use one of the following shortcuts:
 
 You can customize the keybindings in the configuration file (see below). It's also possible to toggle Spotlight from any other Livewire component or via Javascript.
 
-In any Livewire component you can use the `dispatchBrowserEvent` helper.
+In any Livewire component you can use the `dispatchBrowserEvent` or `dispatch` helper.
 
 ```php
+// Livewire v2
 $this->dispatchBrowserEvent('toggle-spotlight');
+
+// Livewire v3
+$this->dispatch('toggle-spotlight');
 ```
 
 You can also use the `$dispatch` helper from Alpine to trigger the same browser event from your markup.
