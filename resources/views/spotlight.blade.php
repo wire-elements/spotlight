@@ -55,11 +55,11 @@
                 <ul x-ref="results" style="max-height: 265px;" class="overflow-y-auto">
                     <template x-for="(item, i) in filteredItems()" :key>
                         <li>
-                            <button @click="go(item[0].item.id)" class="block w-full px-6 py-3 text-left"
+                            <button @click="go(item[0].item.id)" class="block w-full px-6 py-3 ltr:text-left rtl:text-right"
                                     :class="{ 'bg-gray-700': selected === i, 'hover:bg-gray-800': selected !== i }">
                                 <span x-text="item[0].item.name"
                                       :class="{'text-gray-300': selected !== i, 'text-white': selected === i }"></span>
-                                <span x-text="item[0].item.description" class="ml-1"
+                                <span x-text="item[0].item.description" class="ltr:ml-1 rtl:mr-1"
                                       :class="{'text-gray-500': selected !== i, 'text-gray-400': selected === i }"></span>
                             </button>
                         </li>
