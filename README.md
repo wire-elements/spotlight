@@ -420,6 +420,4 @@ Wire Elements is open-sourced software licensed under the [MIT license](LICENSE.
 
 ## Beautiful components crafted with Livewire
 
-<a href="https://wire-elements.dev/"><img src="https://philo.dev/content/images/size/w1000/2022/05/wire-elements-pro.png" width="600" alt="" /></a>
-
-<a href="https://wire-elements.dev/">Sign up to get notified</a>
+<a href="https://wire-elements.dev/pro"><img src="https://philo.dev/content/images/size/w1600/2022/07/wire-elements-pro-v2.png" width="600" alt="" /></a>
