@@ -16,6 +16,14 @@ class Spotlight extends Component
 
     public static function registerCommand(string $command): void
     {
+        // Under Octane, service provider boot() methods only run once per
+        // worker instead of once per request, so this guards against
+        // duplicate/unbounded growth of the static command list if a
+        // provider is ever booted more than once within the same worker.
+        if (collect(self::$commands)->contains(fn (SpotlightCommand $registered) => $registered::class === $command)) {
+            return;
+        }
+
         tap(new $command, function (SpotlightCommand $command) {
             self::$commands[] = $command;
         });

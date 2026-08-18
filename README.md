@@ -319,6 +319,36 @@ class CreateUser extends SpotlightCommand
 }
 ```
 
+## Laravel Octane compatibility
+
+Spotlight keeps its registered commands in a static list that is populated once when the package (or your own
+service provider) boots. Under Octane, provider `boot()` methods only run **once per worker**, not once per
+request, so anything you pass to `registerCommand`, `registerCommandIf`, or `registerCommandUnless` from a service
+provider is evaluated a single time when the worker starts.
+
+This is fine for conditions that don't change at runtime (e.g. config values or feature flags resolved at boot),
+but it means you should **not** base these calls on per-request state such as the authenticated user:
+
+```php
+// Bad under Octane: `auth()->check()` is only evaluated once, when the worker boots,
+// so every request served by that worker will see the result frozen at boot time.
+Spotlight::registerCommandIf(auth()->check(), CreateUser::class);
+```
+
+Instead, always register the command unconditionally and use the `shouldBeShown` method described above to decide
+per-request whether it should be visible. `shouldBeShown` is resolved through the container on every render, so it
+correctly reflects the current request/user under Octane:
+
+```php
+Spotlight::registerCommand(CreateUser::class);
+```
+
+```php
+public function shouldBeShown(Request $request): bool
+{
+    return $request->user()?->can('create user') ?? false;
+}
+```
 
 ## Configuration
 
