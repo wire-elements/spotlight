@@ -26,6 +26,31 @@ To get started, require the package via Composer:
 composer require wire-elements/spotlight
 ```
 
+Spotlight ships its JavaScript and CSS as static files that need to be published to your `public` directory, similar
+to how FilamentPHP publishes its assets. Run the following command after installing (and again after every package
+update):
+
+```shell
+php artisan spotlight:assets
+```
+
+You can also publish them via the standard `vendor:publish` command using the `livewire-ui-spotlight-assets` tag:
+
+```shell
+php artisan vendor:publish --tag=livewire-ui-spotlight-assets
+```
+
+To avoid forgetting this step after every `composer update`, add the command to the `post-autoload-dump` script in your
+application's `composer.json`:
+
+```json
+"scripts": {
+    "post-autoload-dump": [
+        "@php artisan spotlight:assets"
+    ]
+}
+```
+
 ## Livewire directive
 
 Add the Livewire directive `@livewire('livewire-ui-spotlight')`:
@@ -322,7 +347,7 @@ class CreateUser extends SpotlightCommand
 
 ## Configuration
 
-You can customize Spotlight via the `livewire-ui-spotlight.php` config file. This includes some additional options like including CSS if you don't use TailwindCSS for your application. To publish the config run the `vendor:publish` command:
+You can customize Spotlight via the `livewire-ui-spotlight.php` config file. To publish the config run the `vendor:publish` command:
 
 ```shell
 php artisan vendor:publish --tag=livewire-ui-spotlight-config
@@ -365,27 +390,14 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Include CSS
+    | Show results without input
     |--------------------------------------------------------------------------
     |
-    | Spotlight uses TailwindCSS, if you don't use TailwindCSS you will need
-    | to set this parameter to true. This includes the modern-normalize css.
+    | Whether to show command search results without
+    | having to type anything in the search input.
     |
     */
-    'include_css' => false,
-
-    /*
-    |--------------------------------------------------------------------------
-    | Include JS
-    |--------------------------------------------------------------------------
-    |
-    | Spotlight will inject the required Javascript in your blade template.
-    | If you want to bundle the required Javascript you can set this to false
-    | run `npm install --save fuse.js` and add `require('vendor/wire-elements/spotlight/resources/js/spotlight');`
-    | to your script bundler like webpack.
-    |
-    */
-    'include_js' => true,
+    'show_results_without_input' => false,
 ];
 ```
 

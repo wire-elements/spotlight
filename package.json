@@ -1,19 +1,19 @@
 {
     "scripts": {
-        "dev": "npm run development",
-        "development": "mix",
-        "watch": "mix watch",
-        "watch-poll": "mix watch -- --watch-options-poll=1000",
-        "hot": "mix watch --hot",
-        "prod": "npm run production",
-        "production": "mix --production"
+        "build": "vite build",
+        "dev": "vite"
     },
     "devDependencies": {
-        "autoprefixer": "^10.2.5",
-        "laravel-mix": "^6.0.6",
-        "postcss": "^8.2.12",
-        "tailwindcss": "^2.2.4",
-        "vue-template-compiler": "^2.6.12"
+        "@tailwindcss/vite": "^4.1.11",
+        "autoprefixer": "^10.4.20",
+        "laravel-vite-plugin": "^2.0",
+        "tailwindcss": "^4.0.7",
+        "vite": "^7.0.4"
+    },
+    "optionalDependencies": {
+        "@rollup/rollup-linux-x64-gnu": "4.9.5",
+        "@tailwindcss/oxide-linux-x64-gnu": "^4.0.1",
+        "lightningcss-linux-x64-gnu": "^1.29.1"
     },
     "dependencies": {
         "fuse.js": "^6.4.6"

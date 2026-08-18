@@ -1,10 +1,8 @@
 <div>
-    @isset($jsPath)
-        <script>{!! file_get_contents($jsPath) !!}</script>
-    @endisset
-    @isset($cssPath)
-        <style>{!! file_get_contents($cssPath) !!}</style>
-    @endisset
+    @assets
+        <link rel="stylesheet" href="{{ $cssUrl }}">
+        <script src="{{ $jsUrl }}" defer></script>
+    @endassets
 
     <div x-data="LivewireUISpotlight({
         componentId: '{{ $this->id() }}',
