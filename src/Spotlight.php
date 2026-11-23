@@ -46,12 +46,40 @@ class Spotlight extends Component
         });
     }
 
+    protected function getVisibleCommandById(string $id): ?SpotlightCommand
+    {
+        $command = $this->getCommandById($id);
+
+        if ($command === null || ! $this->commandIsVisible($command)) {
+            return null;
+        }
+
+        return $command;
+    }
+
+    protected function commandIsVisible(SpotlightCommand $command): bool
+    {
+        if (! method_exists($command, 'shouldBeShown')) {
+            return true;
+        }
+
+        /**
+         * @psalm-suppress InvalidArgument
+         */
+        return (bool) app()->call([$command, 'shouldBeShown']);
+    }
+
     public function searchDependency(string $commandId, $dependency, $query, $resolvedDependencies = []): void
     {
-        $command = $this->getCommandById($commandId);
+        $command = $this->getVisibleCommandById($commandId);
+
+        if ($command === null) {
+            return;
+        }
+
         $method = Str::camel('search ' . $dependency);
 
-        if (is_object($command) and method_exists($command, $method)) {
+        if (method_exists($command, $method)) {
             $params = array_merge(['query' => $query], (array) $resolvedDependencies);
 
             $this->dependencyQueryResults = collect(ImplicitlyBoundMethod::call(app(), [$command, $method], $params))
@@ -68,7 +96,11 @@ class Spotlight extends Component
 
     public function execute(string $commandId, array $dependencies = []): void
     {
-        $command = $this->getCommandById($commandId);
+        $command = $this->getVisibleCommandById($commandId);
+
+        if ($command === null) {
+            return;
+        }
 
         if (method_exists($command, 'execute')) {
             $params = array_merge(['spotlight' => $this], $dependencies);
@@ -85,14 +117,7 @@ class Spotlight extends Component
         return view('livewire-ui-spotlight::spotlight', [
             'commands' => collect(self::$commands)
                 ->filter(function (SpotlightCommand $command) {
-                    if (! method_exists($command, 'shouldBeShown')) {
-                        return true;
-                    }
-
-                    /**
-                     * @psalm-suppress InvalidArgument
-                     */
-                    return app()->call([$command, 'shouldBeShown']);
+                    return $this->commandIsVisible($command);
                 })
                 ->values()
                 ->map(function (SpotlightCommand $command) {

@@ -319,6 +319,8 @@ class CreateUser extends SpotlightCommand
 }
 ```
 
+`shouldBeShown` is evaluated on every Spotlight request (rendering, searching and executing). Base it on the user (permissions, roles), not on the route of the page Spotlight was opened on.
+
 
 ## Configuration
 
