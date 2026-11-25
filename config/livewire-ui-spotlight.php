@@ -34,32 +34,6 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Include CSS
-    |--------------------------------------------------------------------------
-    |
-    | Spotlight uses TailwindCSS, if you don't use TailwindCSS you will need
-    | to set this parameter to true. This includes the modern-normalize css.
-    |
-    */
-    'include_css' => false,
-
-
-    /*
-    |--------------------------------------------------------------------------
-    | Include JS
-    |--------------------------------------------------------------------------
-    |
-    | Spotlight will inject the required Javascript in your blade template.
-    | If you want to bundle the required Javascript you can set this to false,
-    | call 'npm install fuse.js' or 'yarn add fuse.js',
-    | then add `require('vendor/wire-elements/spotlight/resources/js/spotlight');`
-    | to your script bundler like webpack.
-    |
-    */
-    'include_js' => true,
-
-    /*
-    |--------------------------------------------------------------------------
     | Show results without input
     |--------------------------------------------------------------------------
     |
@@ -68,5 +42,4 @@ return [
     |
     */
     'show_results_without_input' => false,
-
 ];
